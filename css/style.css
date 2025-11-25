@@ -9,6 +9,24 @@
   --card-bg: #111111;       /* Card Background (sama dengan body) */
 }
 
+/* --- IMAGE PROTECTION & OPTIMIZATION --- */
+
+/* Mencegah gambar di-select atau di-drag (Tetap Biarkan Ini) */
+img {
+  -webkit-user-drag: none;
+  user-select: none;
+  -moz-user-select: none;
+  -webkit-user-select: none;
+  -ms-user-select: none;
+}
+
+/* KHUSUS GAMBAR PRODUK & HERO SAJA: */
+/* Lookbook JANGAN dimasukkan ke sini agar hover tetap jalan */
+.hero-visual img, 
+.product-img img {
+  pointer-events: none; 
+}
+
 /* --- RESET & BASIC --- */
 * {
   margin: 0;
@@ -88,81 +106,124 @@ nav {
   color: var(--text-head);
 }
 
-/* --- HERO SECTION --- */
+/* --- SEAMLESS MARQUEE FIX (FINAL) --- */
+.marquee-container {
+  background: #980000;
+  color: #fff;
+  padding: 12px 0; /* Sedikit dipertebal agar gagah */
+  overflow: hidden;
+  position: relative;
+  z-index: 20;
+  border-bottom: 1px solid #7a0000;
+}
+
+.marquee-wrapper {
+  display: flex;
+  width: max-content; /* PENTING: Agar lebar mengikuti panjang teks */
+  animation: scrollSeamless 60s linear infinite; /* Diperlambat karena teks makin panjang */
+}
+
+.marquee-wrapper span {
+  font-size: 0.85rem;
+  font-weight: 700;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  white-space: nowrap;
+  
+  /* Tidak perlu padding-right besar karena teks sudah menyambung */
+  padding-right: 0; 
+}
+
+@keyframes scrollSeamless {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+
+/* Responsif HP */
+@media (max-width: 768px) {
+  .marquee-wrapper {
+    /* Di HP boleh lebih cepat karena layar kecil */
+    animation-duration: 30s; 
+  }
+}
+
+/* --- HERO SECTION (Full Background Version) --- */
 .hero {
-  min-height: 90vh; /* Tinggi layar full */
+  position: relative;
+  min-height: 100vh; /* Tinggi layar penuh */
+  width: 100%;
   display: flex;
-  align-items: center;
-  justify-content: space-between; /* Teks kiri, Gambar kanan */
-  padding: 0 5%; /* Padding kiri kanan */
-  overflow: hidden; /* Mencegah scrollbar jika gambar kebesaran */
-  position: relative;
+  align-items: center; /* Teks vertikal tengah */
+  justify-content: flex-start; /* Teks rata kiri */
+  padding: 0 5%;
+  overflow: hidden;
+
+  /* SETUP BACKGROUND IMAGE */
+  /* Pastikan path gambar benar */
+  background-image: url('../assets/img/heromodel.webp'); 
+  background-size: cover;      /* Memenuhi seluruh area */
+  background-position: center 20%; /* Fokus tengah gambar */
+  background-repeat: no-repeat;
 }
 
-.hero-visual {
-  flex: 1;
-  display: flex;
-  justify-content: flex-end; /* Rata kanan */
-  position: relative;
-  z-index: 1;
-}
-
-.hero-content {
-  margin-left: 100px; 
-  position: relative;
-  z-index: 2;
-}
-
-.hero-visual img {
-  max-width: 100%;
-  height: auto;
-  max-height: 85vh;
-  object-fit: cover;
-  
-  /* --- AGGRESSIVE MASKING (V2) --- */
-  /* Kita ubah jadi ellipse agar lonjong mengikuti tubuh */
-  /* Angka 40% artinya hanya 40% tengah yang solid */
-  /* Angka 70% artinya di titik 70% gambar sudah hilang total */
-  
-  -webkit-mask-image: radial-gradient(
-    ellipse at center, 
-    black 40%, 
-    transparent 70%
-  );
-  
-  mask-image: radial-gradient(
-    ellipse at center, 
-    black 40%, 
-    transparent 70%
-  );
-  
-  /* Sedikit kurangi opacity agar beton tidak terlalu "glowing" */
-  opacity: 0.85; 
-  
-  /* Animasi Masuk */
-  animation: fadeInUp 1s ease-out 0.5s forwards;
-  transform: translateY(30px);
-}
-
-/* Posisi Sidebar di Kiri Layar */
-.hero-sidebar {
+/* OVERLAY GELAP (Agar teks terbaca) */
+/* Kita gunakan gradient agar bagian kiri (tempat teks) lebih gelap */
+.hero::before {
+  content: "";
   position: absolute;
-  left: 40px; /* Jarak dari kiri */
+  inset: 0; /* Full layar */
+  background: linear-gradient(to right, rgba(17,17,17) 35%, rgba(0,0,0,0.4) 100%);
+  z-index: 1; /* Di atas gambar, di bawah teks */
+}
+
+/* SETUP KONTEN TEKS */
+.hero-content {
+  position: relative;
+  z-index: 2; /* Agar di atas overlay */
+  margin-left: 80px; /* Jarak dari sidebar kiri */
+  max-width: 600px;
+}
+
+.hero h1 {
+  font-size: 4.5rem;
+  font-weight: 900;
+  line-height: 1.1;
+  color: var(--text-head);
+  margin-bottom: 20px;
+  animation: fadeInUp 1s ease-out forwards;
+  opacity: 0;
+}
+
+.subtitle {
+  font-size: 1.2rem;
+  color: #ddd; /* Warna sedikit lebih terang */
+  margin-bottom: 40px;
+  animation: fadeInUp 1s ease-out 0.3s forwards;
+  opacity: 0;
+}
+
+/* SETUP SIDEBAR KIRI */
+.hero-sidebar {
+    color: var(--text-body);
+  position: absolute;
+  left: 40px;
   top: 50%;
-  transform: translateY(-50%); /* Tengah vertikal */
+  transform: translateY(-50%);
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 20px;
+  gap: 30px;
   z-index: 10;
 }
 
+/* Mengatur Link (IG, X) agar Putih */
 .hero-sidebar a {
-  color: #666;
-  text-decoration: none;
-  font-size: 0.9rem;
-  font-weight: 600;
-  transition: 0.3s;
+  color: #FFFFFF; /* Paksa warna Putih */
+  text-decoration: none; /* Hilangkan garis bawah */
+  font-size: 1rem;
+  font-weight: 600; /* Sedikit tebal agar jelas */
+  transition: 0.3s ease;
+  text-orientation: mixed;   /* Opsional */
 }
 
 .hero-sidebar a:hover {
@@ -179,20 +240,10 @@ nav {
 .sidebar-text {
   writing-mode: vertical-rl; /* Teks berdiri */
   text-orientation: mixed;
-  color: #444;
+  color: #fff;
   font-size: 0.8rem;
   letter-spacing: 2px;
   font-family: monospace;
-}
-
-/* Sembunyikan di HP agar tidak sempit */
-@media (max-width: 768px) {
-  .hero-sidebar { display: none; }
-
-  .hero-content {
-    margin-left: 0; /* Reset margin di HP */
-    text-align: center;
-  }
 }
 
 .hero h1 {
@@ -567,184 +618,292 @@ nav {
   z-index: 2;
 }
 
-/* --- FOOTER FIX --- */
+/* --- FOOTER CLEAN LAYOUT --- */
 #footer {
-  background: #050505; /* Hitam pekat sedikit beda dari body */
+  background: #050505;
   padding: 80px 0 30px;
   border-top: 1px solid #222;
   color: #B8B8B8;
   font-size: 0.95rem;
 }
 
-.footer-grid {
+/* 1. BAGIAN ATAS (3 Kolom) */
+.footer-top {
   display: grid;
-  grid-template-columns: 1fr 1fr 1fr; /* 3 kolom sama lebar */
-  gap: 40px;
+  grid-template-columns: 1fr 1fr 1fr; /* Kiri, Tengah, Kanan */
   align-items: start;
+  gap: 40px;
+  margin-bottom: 60px; /* Jarak ke Newsletter */
 }
 
-/* Kolom 1: Brand Style */
+/* Brand (Kiri) */
 .footer-brand h3 {
   color: #fff;
   font-size: 1.6rem;
   font-weight: 800;
   letter-spacing: 1px;
-  margin-bottom: 10px;
+  margin-bottom: 8px;
+}
+.footer-brand p { color: #666; font-size: 0.9rem; }
+
+/* Navigasi (Tengah - Rata Tengah) */
+.footer-nav {
+  display: flex;
+  justify-content: center; /* Posisi di tengah kolom */
 }
 
-.footer-brand p {
-  color: #666;
-  font-size: 0.9rem;
-}
-
-/* Kolom 2: Navigasi (FIX MASALAH UTAMA) */
 .footer-nav ul {
-  list-style: none !important; /* Hapus bullet point */
+  list-style: none;
   padding: 0;
-  margin: 0;
   display: flex;
   flex-direction: column;
-  gap: 15px; /* Jarak antar link */
+  gap: 12px;
+  text-align: center; /* Teks rata tengah */
 }
 
 .footer-nav a {
-  text-decoration: none !important; /* Hapus garis bawah biru */
-  color: #B8B8B8 !important; /* Paksa warna abu-abu */
+  text-decoration: none;
+  color: #B8B8B8;
   font-weight: 500;
-  font-size: 1rem;
-  transition: all 0.3s ease;
-  display: inline-block;
-  width: fit-content;
+  transition: 0.3s;
 }
 
-/* Efek Hover Link: Warna Merah & Geser ke Kanan */
 .footer-nav a:hover {
-  color: #980000 !important; 
-  transform: translateX(5px); 
+  color: #980000;
+  padding-left: 5px; /* Efek geser dikit */
 }
 
-/* Kolom 3: Social Icons */
+/* Social (Kanan - Rata Kanan) */
 .footer-social {
   display: flex;
-  justify-content: flex-end; /* Ikon rata kanan */
+  justify-content: flex-end;
 }
 
-.social-icons {
-  display: flex;
-  gap: 20px;
-}
-
+.social-icons { display: flex; gap: 20px; }
 .social-icons a {
-  color: #fff !important;
-  font-size: 1.8rem; /* Ikon lebih besar */
+  color: #fff;
+  font-size: 1.5rem;
   text-decoration: none;
-  transition: color 0.3s ease;
+  transition: 0.3s;
 }
+.social-icons a:hover { color: #980000; transform: translateY(-3px); }
 
-.social-icons a:hover {
-  color: #980000 !important; /* Merah saat hover */
-}
 
-/* Copyright Section */
-.copyright {
-  margin-top: 60px;
-  padding-top: 25px;
-  border-top: 1px solid #1a1a1a;
+/* 2. BAGIAN TENGAH (Newsletter) */
+.footer-newsletter {
   text-align: center;
-  color: #444; /* Warna teks redup */
+  padding: 40px 0;
+  border-top: 1px solid #1a1a1a;
+  border-bottom: 1px solid #1a1a1a;
+  max-width: 600px;
+  margin: 0 auto; /* Tengah secara horizontal */
+}
+
+.footer-newsletter h3 {
+  color: #fff;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  margin-bottom: 8px;
+}
+
+.footer-newsletter p {
+  font-size: 0.9rem;
+  opacity: 0.7;
+  margin-bottom: 20px;
+}
+
+.newsletter-form {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+}
+
+.newsletter-form input {
+  background: transparent;
+  border: 1px solid #333;
+  padding: 10px 15px;
+  color: #fff;
+  border-radius: 4px;
+  width: 100%;
+  max-width: 280px;
+  outline: none;
+  transition: border-color 0.3s;
+}
+
+.newsletter-form input:focus { border-color: #980000; }
+
+.newsletter-form button {
+  background: #980000;
+  color: #fff;
+  border: none;
+  padding: 0 20px;
+  cursor: pointer;
+  border-radius: 4px;
+  font-size: 1.2rem;
+  transition: 0.3s;
+}
+
+.newsletter-form button:hover { background: #c20000; }
+
+
+/* 3. BAGIAN BAWAH (Copyright) */
+.copyright {
+  margin-top: 30px;
+  text-align: center;
   font-size: 0.8rem;
-  letter-spacing: 0.5px;
+  opacity: 0.4;
 }
 
-/* --- RESPONSIVE --- */
+
+/* --- RESPONSIVE MOBILE --- */
 @media (max-width: 768px) {
-  .logo img {
-    height: 35px; /* Sedikit lebih kecil di HP */
-  }
-  .hero h1 { font-size: 2.8rem; }
-
-  .hero {
-    flex-direction: column; /* Tumpuk ke bawah */
-    justify-content: center;
+  .footer-top {
+    grid-template-columns: 1fr; /* Tumpuk vertikal */
     text-align: center;
-    padding-top: 100px;
-  }
-
-  .hero-visual {
-    margin-top: 40px;
-    justify-content: center;
+    gap: 30px;
   }
   
-  .hero-visual img {
-  max-width: 100%;
-  height: auto;
-  max-height: 85vh;
-  object-fit: cover; /* Gunakan cover agar rapi */
+  .footer-nav { justify-content: center; }
+  .footer-social { justify-content: center; }
   
-  /* --- MAGIC MASKING --- */
-  /* Ini akan membuat gambar memudar di KIRI, KANAN, dan BAWAH */
-  /* Agar tidak terlihat kotak patah */
-  -webkit-mask-image: radial-gradient(
-    circle at center top, 
-    black 60%, 
-    transparent 100%
-  );
-  mask-image: radial-gradient(
-    circle at center top, 
-    black 60%, 
-    transparent 100%
-  );
+  .newsletter-form {
+    flex-direction: column; /* Input & tombol tumpuk */
+    align-items: center;
+  }
   
-  /* Opsional: Sedikit kurangi opacity agar background beton tidak terlalu terang */
-  opacity: 0.9; 
-  
-  /* Animasi Masuk */
-  animation: fadeInUp 1s ease-out 0.5s forwards;
-  transform: translateY(30px);
+  .newsletter-form input { width: 100%; }
+  .newsletter-form button { width: 100%; padding: 10px; }
 }
+
+/* =========================================
+   RESPONSIVE DEVICE SETTINGS (FORCE FIX)
+   ========================================= */
+
+/* --- 1. TABLET & LAPTOP KECIL (Max-width: 1024px) --- */
+@media (max-width: 1024px) {
+  .container { padding: 0 30px; }
+  .hero h1 { font-size: 3.5rem; }
   
-  .menu-toggle { display: block; }
+  /* Geser margin kiri */
+  .hero-content { margin-left: 40px; } 
+  .hero-sidebar { left: 15px; }
+  .look-grid { grid-template-columns: repeat(2, 1fr); }
+  nav { padding: 20px 30px; }
+  
+  /* FIX MASKING TABLET (Samakan dengan Monitor) */
+  .hero .hero-visual img {
+     -webkit-mask-image: radial-gradient(ellipse at center, black 40%, transparent 70%);
+     mask-image: radial-gradient(ellipse at center, black 40%, transparent 70%);
+  }
+}
+
+
+/* --- 2. MOBILE & TABLET PORTRAIT (Max-width: 768px) --- */
+@media (max-width: 768px) {
+  
+  /* --- NAVIGASI --- */
+  .menu-toggle { display: block; z-index: 1001; }
   
   .nav-links {
     position: fixed;
-    top: 0;
-    right: -100%;
-    height: 100vh;
-    width: 80%;
-    background: #000;
+    top: 0; right: -100%;
+    height: 100vh; width: 80%;
+    background: #080808;
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    transition: 0.4s ease;
-    border-left: 1px solid #333;
+    transition: 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    border-left: 1px solid #222;
+    box-shadow: -10px 0 50px rgba(0,0,0,0.9);
+    z-index: 1000;
   }
   
   .nav-links.active { right: 0; }
+  .nav-links li { margin: 20px 0; }
+  .nav-links a { font-size: 1.3rem; }
+
+  /* --- HERO SECTION --- */
+  .hero {
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    padding-top: 100px;
+    padding-bottom: 0;
+    min-height: auto;
+    overflow: hidden; /* Mencegah masking bocor keluar layar */
+  }
   
-  .about-grid, .footer-grid, .look-grid {
+  .hero-content {
+    margin-left: 0;
+    width: 100%;
+    padding: 0 20px;
+    margin-bottom: 20px;
+    z-index: 3;
+  }
+  
+  .hero h1 { font-size: 2.8rem; margin-bottom: 10px; }
+  .subtitle { margin-bottom: 25px; font-size: 1rem; }
+  .cta-btn { width: 100%; max-width: 280px; text-align: center; }
+  .hero-sidebar { display: none; }
+  
+  /* --- GAMBAR HERO (FORCE SPOTLIGHT EFFECT) --- */
+  .hero .hero-visual {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: flex-end;
+    margin-top: 0;
+  }
+  
+  /* Selector diperkuat: .hero .hero-visual img */
+  .hero .hero-visual img {
+    width: 90% !important; /* Paksa lebar */
+    max-width: 400px;
+    height: auto !important;
+    object-fit: contain;
+    
+    /* MASKING: DISAMAKAN DENGAN MONITOR (Ellipse/Spotlight) */
+    /* Kita perluas area hitam (50%) agar di layar sempit model tidak terpotong */
+    -webkit-mask-image: radial-gradient(
+      ellipse at center, 
+      black 50%, 
+      transparent 80%
+    );
+    mask-image: radial-gradient(
+      ellipse at center, 
+      black 50%, 
+      transparent 80%
+    );
+    
+    opacity: 0.9;
+    transform: none; /* Reset posisi animasi jika mengganggu layout */
+  }
+
+  /* --- SECTION LAIN --- */
+  .about-grid, .footer-grid {
     grid-template-columns: 1fr;
-  }
-
-  #about::before {
-    background-attachment: scroll; /* Matikan parallax di HP agar ringan */
-  }
-  .about-content h2 {
-    font-size: 2.2rem;
-  }
-  
-  .look-grid img { height: 300px; }
-
-  .footer-grid {
-    grid-template-columns: 1fr; /* Jadi 1 kolom vertikal */
     text-align: center;
     gap: 40px;
   }
+  
+  #about::before { background-attachment: scroll; }
+  
+  .look-grid { grid-template-columns: 1fr; }
+  .look-grid img { height: 350px; }
+  
+  .footer-social { justify-content: center; }
+  .footer-nav ul { align-items: center; }
+}
 
-  .footer-nav ul {
-    align-items: center; /* Link jadi di tengah */
-  }
-
-  .footer-social {
-    justify-content: center; /* Icon jadi di tengah */
+/* --- 3. HP LAYAR KECIL --- */
+@media (max-width: 480px) {
+  .hero h1 { font-size: 2.4rem; }
+  .product-grid { grid-template-columns: 1fr; }
+  
+  /* Di HP kecil, masking sedikit diperlebar agar tidak terlalu sempit */
+  .hero .hero-visual img { 
+    -webkit-mask-image: radial-gradient(ellipse at center, black 55%, transparent 85%);
+    mask-image: radial-gradient(ellipse at center, black 55%, transparent 85%);
   }
 }
