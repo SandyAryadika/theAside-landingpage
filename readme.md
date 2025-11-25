@@ -50,7 +50,7 @@ Cara ini paling direkomendasikan agar semua asset dan path loading berjalan semp
 
 1.  **Clone Repository** (atau download ZIP):
     ```bash
-    git clone [https://github.com/username-anda/the-a-side.git](https://github.com/username-anda/the-a-side.git)
+    git clone https://github.com/SandyAryadika/theAside-landingpage.git
     ```
 2.  Buka folder project di **Visual Studio Code**.
 3.  Install Ekstensi **Live Server** (oleh Ritwick Dey) di VS Code jika belum punya.
