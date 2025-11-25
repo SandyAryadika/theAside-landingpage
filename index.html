@@ -3,171 +3,174 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>The A-side | Cloth</title>
     <link rel="stylesheet" href="css/style.css">
-    <link rel="preconnect" href="js/main.js">
+    <link href="https://cdn.jsdelivr.net/npm/remixicon@2.5.0/fonts/remixicon.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/remixicon@4.1.0/fonts/remixicon.css" rel="stylesheet">
 </head>
 <body>
-    <header>
-  <nav aria-label="Main Navigation">
-    <div class="logo">RAWWEAR</div>
-    <ul class="nav-links">
-      <li><a href="#products">Products</a></li>
-      <li><a href="#lookbook">Lookbook</a></li>
-      <li><a href="#about">About</a></li>
-    </ul>
-  </nav>
-
-  <section class="hero" aria-labelledby="hero-title">
-    <div class="hero-content">
-      <h1 id="hero-title">Street Culture. Raw Energy.</h1>
-      <p class="subtitle">
-        Apparel crafted for rebels — made to conquer the asphalt.
-      </p>
-      <a href="#products" class="cta-btn">Drop 01 — Explore</a>
-    </div>
-  </section>
-</header>
-
-<section id="products" aria-labelledby="products-title">
-  <div class="container">
-    <h2 id="products-title">Featured Drop</h2>
-
-    <div class="product-grid">
-      
-      <article class="product-card">
-        <div class="product-img">
-          <span class="badge">LIMITED</span>
-          <img src="assets/img/post1.png" alt="Black hoodie RAWWEAR edition">
-        </div>
-
-        <h3>Raw Hoodie V1</h3>
-        <div class="rating">
-          ★★★★☆
-        </div>
-        <p class="price">Rp 399.000</p>
-        <button class="buy-btn">View Details</button>
-      </article>
-
-      <article class="product-card">
-        <div class="product-img">
-          <span class="badge">DROP 01</span>
-          <img src="assets/img/post1.png" alt="Black hoodie RAWWEAR edition">
-        </div>
-
-        <h3>Raw Hoodie V1</h3>
-        <div class="rating">
-          ★★★★☆
-        </div>
-        <p class="price">Rp 399.000</p>
-        <button class="buy-btn">View Details</button>
-      </article>
-
-      <article class="product-card">
-        <div class="product-img">
-          <span class="badge">DROP 01</span>
-          <img src="assets/img/post1.png" alt="Black hoodie RAWWEAR edition">
-        </div>
-
-        <h3>Raw Hoodie V1</h3>
-        <div class="rating">
-          ★★★★☆
-        </div>
-        <p class="price">Rp 399.000</p>
-        <button class="buy-btn">View Details</button>
-      </article>
-      
-    </div>
-  </div>
-  <div class="modal" id="modal">
-    <div class="modal-content">
-      <span class="close-modal">×</span>
-      <img src="" alt="" id="modal-img">
-      <h3 id="modal-title"></h3>
-      <p id="modal-price"></p>
-      <button class="buy-btn full">Go to Product</button>
-    </div>
-  </div>
-</section>
-
-<section id="about" aria-labelledby="about-title">
-  <div class="container about-grid">
     
-    <div class="about-img">
-      <img src="assets/img/post1.png" alt="RAWWEAR streetwear photoshoot urban style">
-    </div>
+    <header>
+      <nav aria-label="Main Navigation">
+        <div class="logo">
+            <a href="#">
+                <img src="assets/img/Logo Aside.webp" alt="The A-side Logo">
+            </a>
+        </div> 
 
-    <div class="about-content">
-      <h2 id="about-title">About RAWWEAR</h2>
-      <p>
-        RAWWEAR dibangun dari kultur jalanan—bukan sekadar apparel.
-        Setiap drop kami dirancang untuk mereka yang bergerak, berkarya,
-        dan menolak standar yang membatasi. Material tebal, potongan clean,
-        warna yang tegas—potongan yang dibuat untuk tahan waktu dan tren.
-      </p>
+        <div class="menu-toggle" id="mobile-menu">
+            <i class="ri-menu-5-line"></i>
+        </div>
+      
+        <ul class="nav-links">
+          <li><a href="#products">Products</a></li>
+          <li><a href="#lookbook">Lookbook</a></li>
+          <li><a href="#about">About</a></li>
+        </ul>
+      </nav>
+    
+      <section class="hero" aria-labelledby="hero-title">
 
-      <p>
-        Kami percaya outfit bukan sekadar fashion. Ia adalah identitas.
-        Hoodie yang dipakai saat latihan, kaos lusuh dari malam panjang,
-        jaket yang menemani hari pertama kerja—semuanya punya cerita yang
-        menempel pada pemiliknya.
-      </p>
+        <div class="hero-sidebar">
+          <a href="#">IG</a>
+          <a href="#">X</a>
+          <div class="sidebar-line"></div>
+          <span class="sidebar-text">EST. 2025</span>
+        </div>
 
-      <a href="#products" class="brand-btn">Shop the Collection</a>
-    </div>
+        <div class="hero-content">
+          <h1 id="hero-title">The <br>A-side</h1>
+          <p class="subtitle">Sederhana bukan berarti biasa.</p>
+          <a href="#products" class="cta-btn">Explore Drop 01</a>
+        </div>
+      
+        <div class="hero-visual">
+           <img src="assets/img/model-hero.webp" alt="Hero Model">
+        </div>
+      </section>
+    </header>
 
-  </div>
-</section>
+    <section id="products" class="reveal">
+      <div class="container">
+        <h2>Latest Drop</h2>
 
-<section id="lookbook" aria-labelledby="lookbook-title">
-  <div class="container">
-    <h2 id="lookbook-title">Lookbook</h2>
-    <p class="look-desc">
-      Visual diambil dari momen jalanan. 
-      Outfit yang dipakai, bukan sekadar difoto.
-    </p>
+        <div class="product-grid">
+          
+          <article class="product-card" 
+                   data-img="assets/img/black-tshirt.webp" 
+                   data-title="Signature Tee - Black" 
+                   data-price="Rp 99.000">
+            <div class="product-img">
+              <span class="badge">NEW</span>
+              <img src="assets/img/black-tshirt.webp" alt="Signature Tee - Black">
+              <button class="quick-view">Quick View</button>
+            </div>
+            <h3>Signature Tee - Black</h3>
+            <p class="price">Rp 99.000</p>
+            <button class="buy-btn">Add to Cart</button>
+          </article>
+          
+          <article class="product-card" 
+                   data-img="assets/img/red-hoodie.webp" 
+                   data-title="Hoodie - Red" 
+                   data-price="Rp 399.000">
+            <div class="product-img">
+              <span class="badge">LIMITED</span>
+              <img src="assets/img/red-hoodie.webp" alt="Hoodie - Red">
+              <button class="quick-view">Quick View</button>
+            </div>
+            <h3>Hoodie - Red</h3>
+            <p class="price">Rp 399.000</p>
+            <button class="buy-btn">Add to Cart</button>
+          </article>
 
-    <div class="look-grid">
-      <img src="assets/img/post1.png" alt="Model memakai hoodie streetwear di jalanan kota">
-      <img src="assets/img/post1.png" alt="Close up hoodie hitam RAWWEAR">
-      <img src="assets/img/post1.png" alt="Skater memakai hoodie hitam saat melakukan trick">
-      <img src="assets/img/post1.png" alt="Hoodie difoto di lorong kota malam">
-    </div>
-  </div>
-</section>
-
-<footer id="footer">
-  <div class="container footer-grid">
-
-    <div class="footer-brand">
-      <h3>RAWWEAR</h3>
-      <p>Streetwear crafted for movement & identity.</p>
-    </div>
-
-    <nav class="footer-links" aria-label="Footer Navigation">
-      <ul>
-        <li><a href="#hero">Home</a></li>
-        <li><a href="#products">Products</a></li>
-        <li><a href="#lookbook">Lookbook</a></li>
-        <li><a href="#about">About</a></li>
-      </ul>
-    </nav>
-
-    <div class="footer-social">
-      <p>Stay Connected</p>
-      <div class="social-icons">
-        <a href="#"><i class="ri-instagram-line"></i></a>
-        <a href="#"><i class="ri-tiktok-line"></i></a>
-        <a href="#"><i class="ri-youtube-line"></i></a>
+          <article class="product-card" 
+                   data-img="assets/img/beige-loose-pants.webp" 
+                   data-title="Loose Pants - Beige" 
+                   data-price="Rp 450.000">
+            <div class="product-img">
+              <span class="badge">BESTSELLER</span>
+              <img src="assets/img/beige-loose-pants.webp" alt="Loose Pants - Beige">
+              <button class="quick-view">Quick View</button>
+            </div>
+            <h3>Loose Pants - Beige</h3>
+            <p class="price">Rp 450.000</p>
+            <button class="buy-btn">Add to Cart</button>
+          </article>
+          
+        </div>
       </div>
+      
+      <div class="modal" id="modal">
+        <div class="modal-content">
+        <span class="close-modal"><i class="ri-close-line"></i></span>
+        <img src="" alt="Detail" id="modal-img">
+        <h3 id="modal-title">Product</h3>
+    <p id="modal-price" class="price" style="font-size: 1.2rem; color: #fff;">Rp 0</p>
+    
+    <a id="wa-link" href="#" target="_blank" class="buy-btn full" style="display: block; text-decoration: none; text-align: center;">
+        <i class="ri-whatsapp-line"></i> Order via WhatsApp
+    </a>
+
+  </div>
+    </section>
+
+    <section id="about" class="reveal">
+  <div class="container">
+    <div class="about-content full-width">
+      <h2>Philosophy</h2>
+      <p>
+        The A-side tumbuh dari keinginan untuk melawan visual yang berisik.
+        Monokrom, bahan berkualitas, dan bentuk yang berdiri tanpa perlu logo besar.
+        Bukan untuk mengejar perhatian, tapi untuk mereka yang tahu bahwa keheningan bisa lebih kuat dari suara.
+      </p>
+      <a href="#products" class="brand-btn">Read Our Story</a>
+    </div>
+  </div>
+</section>
+
+    <section id="lookbook" class="reveal">
+      <div class="container">
+        <h2>Lookbook</h2>
+        <div class="look-grid">
+          <img src="assets/img/post1.png" alt="Look 1">
+          <img src="assets/img/post1.png" alt="Look 2">
+          <img src="assets/img/post1.png" alt="Look 3">
+          <img src="assets/img/post1.png" alt="Look 4">
+        </div>
+      </div>
+    </section>
+
+    <footer id="footer">
+    <div class="container footer-grid">
+  
+      <div class="footer-brand">
+        <h3>The A-side</h3>
+        <p>Gresik, Indonesia.</p>
+      </div>
+
+      <div class="footer-nav">
+        <ul>
+          <li><a href="#">Home</a></li>
+          <li><a href="#products">Shop</a></li>
+          <li><a href="#about">Philosophy</a></li>
+        </ul>
+      </div>
+
+      <div class="footer-social">
+        <div class="social-icons">
+          <a href="#"><i class="ri-instagram-fill"></i></a>
+          <a href="#"><i class="ri-twitter-x-fill"></i></a>
+        </div>
+      </div>
+
     </div>
 
-  </div>
-
-  <div class="copyright">
-    © 2025 RAWWEAR. All rights reserved.
-  </div>
+    <div class="copyright">
+      © 2025 The A-side. Sederhana bukan berarti biasa.
+    </div>
 </footer>
 
+    <script src="js/main.js"></script>
 </body>
 </html>
