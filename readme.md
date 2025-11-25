@@ -1,4 +1,4 @@
-# The A-side | Cloth & Code
+# The A-side | Cloth
 
 ![The A-side Logo](assets/img/Logo%20Aside.webp)
 
